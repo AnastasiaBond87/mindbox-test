@@ -37,8 +37,13 @@ const todoSlice = createSlice({
     setActiveList(state, action: PayloadAction<TListType>) {
       state.activeList = action.payload;
     },
+    deleteTodosCompleted(state) {
+      state.todos = state.todos.filter((todo) => !todo.completed);
+    },
   },
 });
 
-export const { addTodo, deleteTodo, setTodoCompleted, setActiveList } = todoSlice.actions;
+export const { addTodo, deleteTodo, setTodoCompleted, setActiveList, deleteTodosCompleted } =
+  todoSlice.actions;
+
 export { todoSlice };
