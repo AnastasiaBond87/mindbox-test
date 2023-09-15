@@ -1,5 +1,5 @@
-import { Card, Container, Grid, Typography } from '@mui/material';
-import { grey } from '@mui/material/colors';
+import { Container, Grid, Typography } from '@mui/material';
+import TodoInput from '@/components/TodoInput';
 
 function App() {
   return (
@@ -10,7 +10,11 @@ function App() {
       >
         todos
       </Typography>
-      <Grid container direction="column" sx={{ bgcolor: grey[50], boxShadow: 3 }}></Grid>
+      <Grid container direction="column" sx={{ bgcolor: 'background.paper', boxShadow: 3 }}>
+        <Grid item>
+          <TodoInput />
+        </Grid>
+      </Grid>
     </Container>
   );
 }
