@@ -10,9 +10,18 @@ const theme = createTheme({
     primary: {
       main: purple[200],
     },
+    secondary: {
+      main: grey[400],
+    },
   },
   typography: {
     fontFamily: '"Lato", sans-serif',
+    body1: {
+      fontSize: 16,
+    },
+    body2: {
+      fontSize: 18,
+    },
   },
 });
 

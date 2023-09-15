@@ -6,7 +6,7 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "paths": { "@/*": ["./src/*"] },
-    "types": ["vitest/globals"],
+    "types": ["vitest/globals", "vite-plugin-svgr/client"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",

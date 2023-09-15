@@ -4,4 +4,6 @@ interface ITodo {
   completed: boolean;
 }
 
-export type { ITodo };
+type TListType = 'all' | 'completed' | 'active';
+
+export type { ITodo, TListType };

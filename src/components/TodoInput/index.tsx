@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Box, TextField, styled } from '@mui/material';
+import { Box, IconButton, InputAdornment, SvgIcon, TextField, styled } from '@mui/material';
+import { ReactComponent as ClearIcon } from '@/assets/icons/clear-icon.svg';
 import { ChangeEventHandler, FormEventHandler, useState } from 'react';
 import type { ITodo } from '@/shared/types';
 import { useAppDispatch } from '@/app/store/hooks';
@@ -21,22 +22,30 @@ export default function TodoInput() {
   const dispatch = useAppDispatch();
   const [value, setValue] = useState('');
 
+  const clearInput = (): void => {
+    setValue('');
+  };
+
   const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const { value } = event.target;
-    setValue(value.trim());
+    setValue(value);
   };
 
   const handleSubmit: FormEventHandler = (event) => {
     event.preventDefault();
 
-    if (value) {
+    const currValue = value.trim();
+
+    if (currValue) {
       const newTodo: ITodo = {
         id: uuidv4(),
-        body: value,
+        body: currValue,
         completed: false,
       };
 
       dispatch(addTodo(newTodo));
+
+      clearInput();
     }
   };
 
@@ -49,6 +58,17 @@ export default function TodoInput() {
         size="medium"
         value={value}
         onChange={handleChange}
+        InputProps={{
+          endAdornment: value && (
+            <InputAdornment position="end">
+              <IconButton onClick={clearInput}>
+                <SvgIcon fontSize="medium" inheritViewBox color="secondary">
+                  <ClearIcon />
+                </SvgIcon>
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
       />
     </Box>
   );

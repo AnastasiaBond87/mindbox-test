@@ -1,12 +1,14 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { ITodo } from '@/shared/types';
+import { ITodo, TListType } from '@/shared/types';
 
 interface IState {
   todos: ITodo[];
+  activeList: TListType;
 }
 
 const initialState: IState = {
   todos: [],
+  activeList: 'all',
 };
 
 const todoSlice = createSlice({
@@ -32,8 +34,11 @@ const todoSlice = createSlice({
         return el;
       });
     },
+    setActiveList(state, action: PayloadAction<TListType>) {
+      state.activeList = action.payload;
+    },
   },
 });
 
-export const { addTodo, deleteTodo, setTodoCompleted } = todoSlice.actions;
+export const { addTodo, deleteTodo, setTodoCompleted, setActiveList } = todoSlice.actions;
 export { todoSlice };
