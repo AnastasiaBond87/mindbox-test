@@ -1,4 +1,13 @@
-import { ListItem, Checkbox, SvgIcon, Typography, Box, FormLabel, IconButton } from '@mui/material';
+import {
+  ListItem,
+  Checkbox,
+  SvgIcon,
+  Typography,
+  Box,
+  FormLabel,
+  IconButton,
+  Tooltip,
+} from '@mui/material';
 import { ReactComponent as CheckboxIcon } from '@/assets/icons/checkbox-blank-icon.svg';
 import { ReactComponent as CheckboxCheckedIcon } from '@/assets/icons/checkbox-checked-icon.svg';
 import { ReactComponent as TrashIcon } from '@/assets/icons/trash-icon.svg';
@@ -77,24 +86,27 @@ export default function TodoItem({ todo }: IProps) {
               lineHeight: 2,
               color: completed ? 'secondary.main' : 'inherit',
               maxWidth: '100%',
-              whiteSpace: 'normal',
             }}
           >
             {body}
           </Typography>
         </FormLabel>
       </Box>
-      <Box>
-        <IconButton disableRipple onClick={removeTodo} disabled={edited === id}>
-          <SvgIcon>
-            <TrashIcon />
-          </SvgIcon>
-        </IconButton>
-        <IconButton disableRipple>
-          <SvgIcon color={edited === id ? 'success' : 'primary'} onClick={setEditTodo}>
-            <PencilIcon />
-          </SvgIcon>
-        </IconButton>
+      <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+        <Tooltip title="delete" placement="bottom-end">
+          <IconButton disableRipple onClick={removeTodo} disabled={edited === id} sx={{ p: 0 }}>
+            <SvgIcon>
+              <TrashIcon />
+            </SvgIcon>
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="edit" placement="bottom-end">
+          <IconButton disableRipple sx={{ p: 0 }}>
+            <SvgIcon color={edited === id ? 'success' : 'primary'} onClick={setEditTodo}>
+              <PencilIcon />
+            </SvgIcon>
+          </IconButton>
+        </Tooltip>
       </Box>
     </ListItem>
   );
