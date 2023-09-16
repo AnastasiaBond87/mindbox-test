@@ -51,12 +51,18 @@ export default function TodoItem({ todo }: IProps) {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'stretch',
-        gap: 1,
         p: 0,
       }}
     >
       <Box
-        sx={{ display: 'flex', minWidth: '100%', justifyContent: 'space-between', py: 1, px: 2 }}
+        sx={{
+          display: 'flex',
+          minWidth: '100%',
+          justifyContent: 'space-between',
+          py: 1,
+          px: 2,
+          gap: 2,
+        }}
       >
         <Box
           sx={{
@@ -84,13 +90,13 @@ export default function TodoItem({ todo }: IProps) {
           />
           <FormLabel htmlFor={id}>
             <Typography
-              variant="body1"
               sx={{
                 cursor: 'pointer',
                 textDecoration: completed ? 'line-through' : 'none',
                 lineHeight: 2,
                 color: completed ? 'secondary.main' : 'inherit',
-                maxWidth: '100%',
+                wordBreak: 'break-all',
+                lineHeight: 1,
               }}
             >
               {body}

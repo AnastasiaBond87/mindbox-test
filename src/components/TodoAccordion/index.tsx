@@ -46,7 +46,7 @@ export default function TodoAccordion() {
       </StyledAccordionSummary>
       <Divider />
       <AccordionDetails sx={{ p: 0 }}>
-        <Box sx={{ minHeight: '170px', boxShadow: 2 }}>
+        <Box sx={{ minHeight: '146px', boxShadow: 2 }}>
           <TodoList />
         </Box>
         <BottomBar />
