@@ -8,7 +8,7 @@ const btnList: TListType[] = ['all', 'active', 'completed'];
 
 export default function BottomBar() {
   const dispatch = useAppDispatch();
-  const { todos, activeList } = useAppSelector((store) => store.todo);
+  const { todos, activeList, edited } = useAppSelector((store) => store.todo);
   const [totalUncompleted, setTotalUncompleted] = useState<number>(0);
 
   const clearCompleted = (): void => {
@@ -59,7 +59,7 @@ export default function BottomBar() {
           ))}
         </List>
       </Grid>
-      <Button size="small" color="inherit" onClick={clearCompleted}>
+      <Button size="small" color="inherit" onClick={clearCompleted} disabled={!!edited}>
         Clear completed
       </Button>
     </Grid>

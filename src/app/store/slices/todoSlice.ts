@@ -4,11 +4,13 @@ import { ITodo, TListType } from '@/shared/types';
 interface IState {
   todos: ITodo[];
   activeList: TListType;
+  edited: string | null;
 }
 
 const initialState: IState = {
   todos: [],
   activeList: 'all',
+  edited: null,
 };
 
 const todoSlice = createSlice({
@@ -18,6 +20,20 @@ const todoSlice = createSlice({
     addTodo(state, action: PayloadAction<ITodo>) {
       state.todos = [...state.todos, action.payload];
     },
+    setEditedTodo(state, action: PayloadAction<string | null>) {
+      state.edited = action.payload;
+    },
+    editTodo(state, action: PayloadAction<Pick<ITodo, 'body'>>) {
+      const { body } = action.payload;
+
+      state.todos.map((todo) => {
+        if (todo.id === state.edited) {
+          todo.body = body;
+        }
+
+        return todo;
+      });
+    },
     deleteTodo(state, action: PayloadAction<Pick<ITodo, 'id'>>) {
       const { id } = action.payload;
 
@@ -26,12 +42,12 @@ const todoSlice = createSlice({
     setTodoCompleted(state, action: PayloadAction<Pick<ITodo, 'id'>>) {
       const { id } = action.payload;
 
-      state.todos.map((el) => {
-        if (el.id === id) {
-          el.completed = !el.completed;
+      state.todos.map((todo) => {
+        if (todo.id === id) {
+          todo.completed = !todo.completed;
         }
 
-        return el;
+        return todo;
       });
     },
     setActiveList(state, action: PayloadAction<TListType>) {
@@ -43,7 +59,14 @@ const todoSlice = createSlice({
   },
 });
 
-export const { addTodo, deleteTodo, setTodoCompleted, setActiveList, deleteTodosCompleted } =
-  todoSlice.actions;
+export const {
+  addTodo,
+  deleteTodo,
+  setTodoCompleted,
+  setActiveList,
+  deleteTodosCompleted,
+  editTodo,
+  setEditedTodo,
+} = todoSlice.actions;
 
 export { todoSlice };

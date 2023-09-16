@@ -1,10 +1,11 @@
 import { v4 as uuidv4 } from 'uuid';
 import { Box, IconButton, InputAdornment, SvgIcon, TextField, styled } from '@mui/material';
 import { ReactComponent as ClearIcon } from '@/assets/icons/clear-icon.svg';
-import { ChangeEventHandler, FormEventHandler, useState } from 'react';
+import { ChangeEventHandler, FormEventHandler } from 'react';
 import type { ITodo } from '@/shared/types';
-import { useAppDispatch } from '@/app/store/hooks';
-import { addTodo } from '@/app/store/slices/todoSlice';
+import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
+import { addTodo, editTodo, setEditedTodo } from '@/app/store/slices/todoSlice';
+import { setInputValue } from '@/app/store/slices/todoInputSlice';
 
 const StyledTextField = styled(TextField)({
   '& ::placeholder': {
@@ -20,15 +21,16 @@ const StyledTextField = styled(TextField)({
 
 export default function TodoInput() {
   const dispatch = useAppDispatch();
-  const [value, setValue] = useState('');
+  const { value } = useAppSelector((store) => store.todoInput);
+  const { edited } = useAppSelector((store) => store.todo);
 
   const clearInput = (): void => {
-    setValue('');
+    dispatch(setInputValue(''));
   };
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const { value } = event.target;
-    setValue(value);
+    dispatch(setInputValue(value));
   };
 
   const handleSubmit: FormEventHandler = (event) => {
@@ -37,13 +39,18 @@ export default function TodoInput() {
     const currValue = value.trim();
 
     if (currValue) {
-      const newTodo: ITodo = {
-        id: uuidv4(),
-        body: currValue,
-        completed: false,
-      };
+      if (edited) {
+        dispatch(editTodo({ body: currValue }));
+        dispatch(setEditedTodo(null));
+      } else {
+        const newTodo: ITodo = {
+          id: uuidv4(),
+          body: currValue,
+          completed: false,
+        };
 
-      dispatch(addTodo(newTodo));
+        dispatch(addTodo(newTodo));
+      }
 
       clearInput();
     }
