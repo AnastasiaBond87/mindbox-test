@@ -7,6 +7,7 @@ import {
   FormLabel,
   IconButton,
   Tooltip,
+  Divider,
 } from '@mui/material';
 import { ReactComponent as CheckboxIcon } from '@/assets/icons/checkbox-blank-icon.svg';
 import { ReactComponent as CheckboxCheckedIcon } from '@/assets/icons/checkbox-checked-icon.svg';
@@ -48,66 +49,78 @@ export default function TodoItem({ todo }: IProps) {
     <ListItem
       sx={{
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
+        flexDirection: 'column',
+        alignItems: 'stretch',
         gap: 1,
+        p: 0,
       }}
     >
       <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 1,
-        }}
+        sx={{ display: 'flex', minWidth: '100%', justifyContent: 'space-between', py: 1, px: 2 }}
       >
-        <Checkbox
-          id={id}
-          onClick={checkTodo}
-          disableRipple
-          icon={
-            <SvgIcon inheritViewBox color="secondary">
-              <CheckboxIcon />
-            </SvgIcon>
-          }
-          checkedIcon={
-            <SvgIcon inheritViewBox color="success">
-              <CheckboxCheckedIcon />
-            </SvgIcon>
-          }
-          checked={completed}
-          sx={{ p: 0 }}
-        />
-        <FormLabel htmlFor={id}>
-          <Typography
-            variant="body1"
-            sx={{
-              cursor: 'pointer',
-              textDecoration: completed ? 'line-through' : 'none',
-              lineHeight: 2,
-              color: completed ? 'secondary.main' : 'inherit',
-              maxWidth: '100%',
-            }}
-          >
-            {body}
-          </Typography>
-        </FormLabel>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 1,
+          }}
+        >
+          <Checkbox
+            id={id}
+            onClick={checkTodo}
+            disableRipple
+            icon={
+              <SvgIcon inheritViewBox color="secondary">
+                <CheckboxIcon />
+              </SvgIcon>
+            }
+            checkedIcon={
+              <SvgIcon inheritViewBox color="success">
+                <CheckboxCheckedIcon />
+              </SvgIcon>
+            }
+            checked={completed}
+            sx={{ p: 0 }}
+          />
+          <FormLabel htmlFor={id}>
+            <Typography
+              variant="body1"
+              sx={{
+                cursor: 'pointer',
+                textDecoration: completed ? 'line-through' : 'none',
+                lineHeight: 2,
+                color: completed ? 'secondary.main' : 'inherit',
+                maxWidth: '100%',
+              }}
+            >
+              {body}
+            </Typography>
+          </FormLabel>
+        </Box>
+        <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+          <Tooltip title="delete" placement="bottom-end">
+            <IconButton
+              disableRipple
+              onClick={removeTodo}
+              disabled={edited === id}
+              sx={{ p: 0 }}
+              data-testid="delete-btn"
+            >
+              <SvgIcon>
+                <TrashIcon />
+              </SvgIcon>
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="edit" placement="bottom-end">
+            <IconButton disableRipple sx={{ p: 0 }} onClick={setEditTodo} data-testid="edit-btn">
+              <SvgIcon color={edited === id ? 'success' : 'primary'}>
+                <PencilIcon />
+              </SvgIcon>
+            </IconButton>
+          </Tooltip>
+        </Box>
       </Box>
-      <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
-        <Tooltip title="delete" placement="bottom-end">
-          <IconButton disableRipple onClick={removeTodo} disabled={edited === id} sx={{ p: 0 }}>
-            <SvgIcon>
-              <TrashIcon />
-            </SvgIcon>
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="edit" placement="bottom-end">
-          <IconButton disableRipple sx={{ p: 0 }}>
-            <SvgIcon color={edited === id ? 'success' : 'primary'} onClick={setEditTodo}>
-              <PencilIcon />
-            </SvgIcon>
-          </IconButton>
-        </Tooltip>
-      </Box>
+      <Divider />
     </ListItem>
   );
 }

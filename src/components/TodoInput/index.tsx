@@ -58,7 +58,7 @@ export default function TodoInput() {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ flex: 1 }}>
+    <Box component="form" onSubmit={handleSubmit} sx={{ flex: 1 }} data-testid="form">
       <StyledTextField
         autoFocus
         placeholder="What need to be done?"
@@ -70,7 +70,7 @@ export default function TodoInput() {
         InputProps={{
           endAdornment: value && (
             <InputAdornment position="end">
-              <IconButton onClick={clearInput}>
+              <IconButton onClick={clearInput} data-testid="clear-btn">
                 <SvgIcon fontSize="medium" inheritViewBox color="secondary">
                   <ClearIcon />
                 </SvgIcon>

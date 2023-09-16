@@ -10,7 +10,7 @@ interface IState {
 }
 
 const initialState: IState = {
-  todos: getTodos() ?? [],
+  todos: getTodos(),
   activeList: 'all',
   edited: null,
   expanded: true,

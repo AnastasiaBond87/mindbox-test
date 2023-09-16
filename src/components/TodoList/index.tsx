@@ -1,4 +1,4 @@
-import { Divider, List } from '@mui/material';
+import { List } from '@mui/material';
 import type { ITodo } from '@/shared/types';
 import { useAppSelector } from '@/app/store/hooks';
 import { useCallback, useEffect, useState } from 'react';
@@ -37,12 +37,9 @@ export default function TodoList() {
   if (!items.length) return null;
 
   return (
-    <List sx={{ p: 0 }}>
-      {items.map((todo, idx) => (
-        <>
-          <TodoItem todo={todo} key={todo.id} />
-          {idx !== todos.length - 1 && <Divider />}
-        </>
+    <List sx={{ p: 0 }} data-testid="todo-list">
+      {items.map((todo) => (
+        <TodoItem todo={todo} key={todo.id} />
       ))}
     </List>
   );
