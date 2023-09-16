@@ -30,7 +30,6 @@ const theme = createTheme({
           '&.Mui-focusVisible': {
             background: 'inherit',
             cursor: 'default',
-            borderRadius: 0,
           },
         },
       },

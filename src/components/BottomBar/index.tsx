@@ -47,13 +47,20 @@ export default function BottomBar() {
                 outlineWidth: btn === activeList ? '1px' : '0px',
               }}
               onClick={() => setListType(btn)}
+              data-testid="list-type-btn"
             >
               {btn}
             </Button>
           </ListItem>
         ))}
       </List>
-      <Button size="small" color="inherit" onClick={clearCompleted} disabled={!!edited}>
+      <Button
+        size="small"
+        color="inherit"
+        onClick={clearCompleted}
+        disabled={!!edited}
+        data-testid="clear-completed-btn"
+      >
         Clear completed
       </Button>
     </Box>

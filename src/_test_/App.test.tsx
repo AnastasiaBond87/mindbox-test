@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 import App from '@/app';
-import { renderWithProviders } from './utils/renderWithProviders';
+import { renderWithProviders } from '@/_test_/utils/renderWithProviders';
 import { store } from '@/app/store';
 import userEvent from '@testing-library/user-event';
 

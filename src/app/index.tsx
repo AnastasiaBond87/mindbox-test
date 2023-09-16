@@ -15,7 +15,14 @@ function App() {
       >
         todos
       </Typography>
-      <Box sx={{ bgcolor: 'background.paper', boxShadow: 3 }}>
+      <Box
+        sx={{
+          bgcolor: 'background.paper',
+          boxShadow: 3,
+          borderBottomLeftRadius: 2,
+          borderBottomRightRadius: 2,
+        }}
+      >
         <TodoAccordion />
       </Box>
     </Container>
