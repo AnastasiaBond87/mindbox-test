@@ -4,7 +4,7 @@ import { ReactComponent as ClearIcon } from '@/assets/icons/clear-icon.svg';
 import { ChangeEventHandler, FormEventHandler } from 'react';
 import type { ITodo } from '@/shared/types';
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
-import { addTodo, editTodo, setEditedTodo } from '@/app/store/slices/todoSlice';
+import { addTodo, editTodo, setEditedTodo, setTodosExpanded } from '@/app/store/slices/todoSlice';
 import { setInputValue } from '@/app/store/slices/todoInputSlice';
 
 const StyledTextField = styled(TextField)({
@@ -53,12 +53,14 @@ export default function TodoInput() {
       }
 
       clearInput();
+      dispatch(setTodosExpanded(true));
     }
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit}>
+    <Box component="form" onSubmit={handleSubmit} sx={{ flex: 1 }}>
       <StyledTextField
+        autoFocus
         placeholder="What need to be done?"
         fullWidth
         autoComplete="off"

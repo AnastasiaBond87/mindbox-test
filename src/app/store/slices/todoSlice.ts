@@ -1,16 +1,19 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { ITodo, TListType } from '@/shared/types';
+import { getTodos } from '@/shared/utils';
 
 interface IState {
   todos: ITodo[];
   activeList: TListType;
   edited: string | null;
+  expanded: boolean;
 }
 
 const initialState: IState = {
-  todos: [],
+  todos: getTodos() ?? [],
   activeList: 'all',
   edited: null,
+  expanded: true,
 };
 
 const todoSlice = createSlice({
@@ -56,6 +59,9 @@ const todoSlice = createSlice({
     deleteTodosCompleted(state) {
       state.todos = state.todos.filter((todo) => !todo.completed);
     },
+    setTodosExpanded(state, action: PayloadAction<boolean>) {
+      state.expanded = action.payload;
+    },
   },
 });
 
@@ -67,6 +73,7 @@ export const {
   deleteTodosCompleted,
   editTodo,
   setEditedTodo,
+  setTodosExpanded,
 } = todoSlice.actions;
 
 export { todoSlice };

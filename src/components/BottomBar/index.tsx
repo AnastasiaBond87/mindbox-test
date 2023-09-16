@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
-import { Button, Grid, List, ListItem, Typography } from '@mui/material';
+import { Button, Box, List, ListItem, Typography } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
 import { deleteTodosCompleted, setActiveList } from '@/app/store/slices/todoSlice';
 import { TListType } from '@/shared/types';
@@ -29,39 +29,33 @@ export default function BottomBar() {
   }, [getTotalUncompleted]);
 
   return (
-    <Grid container sx={{ justifyContent: 'space-between', alignItems: 'center', p: 2 }}>
-      <Grid item>
-        <Typography>{`${totalUncompleted} item${
-          totalUncompleted === 1 ? '' : 's'
-        } left`}</Typography>
-      </Grid>
-      <Grid item>
-        <List sx={{ display: 'flex', gap: 1 }}>
-          {btnList.map((btn) => (
-            <ListItem
-              key={btn}
+    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: 2 }}>
+      <Typography>{`${totalUncompleted} item${totalUncompleted === 1 ? '' : 's'} left`}</Typography>
+      <List sx={{ display: 'flex', gap: 1 }}>
+        {btnList.map((btn) => (
+          <ListItem
+            key={btn}
+            sx={{
+              p: 0,
+            }}
+          >
+            <Button
+              size="small"
               sx={{
-                p: 0,
+                outlineColor: 'primary',
+                outlineStyle: 'solid',
+                outlineWidth: btn === activeList ? '1px' : '0px',
               }}
+              onClick={() => setListType(btn)}
             >
-              <Button
-                size="small"
-                sx={{
-                  outlineColor: 'primary',
-                  outlineStyle: 'solid',
-                  outlineWidth: btn === activeList ? '1px' : '0px',
-                }}
-                onClick={() => setListType(btn)}
-              >
-                {btn}
-              </Button>
-            </ListItem>
-          ))}
-        </List>
-      </Grid>
+              {btn}
+            </Button>
+          </ListItem>
+        ))}
+      </List>
       <Button size="small" color="inherit" onClick={clearCompleted} disabled={!!edited}>
         Clear completed
       </Button>
-    </Grid>
+    </Box>
   );
 }

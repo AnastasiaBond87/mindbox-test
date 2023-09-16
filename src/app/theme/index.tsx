@@ -23,6 +23,19 @@ const theme = createTheme({
       fontSize: 18,
     },
   },
+  components: {
+    MuiAccordionSummary: {
+      styleOverrides: {
+        root: {
+          '&.Mui-focusVisible': {
+            background: 'inherit',
+            cursor: 'default',
+            borderRadius: 0,
+          },
+        },
+      },
+    },
+  },
 });
 
 export { theme };

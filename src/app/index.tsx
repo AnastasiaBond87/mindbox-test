@@ -1,7 +1,5 @@
-import { Box, Container, Divider, Grid, Typography } from '@mui/material';
-import TodoInput from '@/components/TodoInput';
-import TodoList from '@/components/TodoList';
-import BottomBar from '@/components/BottomBar';
+import { Box, Container, Typography } from '@mui/material';
+import TodoAccordion from '@/components/TodoAccordion';
 
 function App() {
   return (
@@ -17,17 +15,9 @@ function App() {
       >
         todos
       </Typography>
-      <Grid container direction="column" sx={{ bgcolor: 'background.paper', boxShadow: 3 }}>
-        <Grid item>
-          <TodoInput />
-          <Divider />
-          <Box component="div" sx={{ minHeight: '163px' }}>
-            <TodoList />
-          </Box>
-          <Divider />
-          <BottomBar />
-        </Grid>
-      </Grid>
+      <Box sx={{ bgcolor: 'background.paper', boxShadow: 3 }}>
+        <TodoAccordion />
+      </Box>
     </Container>
   );
 }

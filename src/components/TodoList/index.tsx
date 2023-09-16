@@ -18,9 +18,21 @@ export default function TodoList() {
     }
   }, [type, todos]);
 
+  const setTodos = useCallback((): void => {
+    localStorage.setItem('PbAeB_todos', JSON.stringify(todos));
+  }, [todos]);
+
   useEffect(() => {
     filterTodos();
   }, [filterTodos]);
+
+  useEffect(() => {
+    window.addEventListener('beforeunload', setTodos);
+
+    return () => {
+      window.removeEventListener('beforeunload', setTodos);
+    };
+  }, [setTodos]);
 
   if (!items.length) return null;
 
