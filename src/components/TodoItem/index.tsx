@@ -59,8 +59,7 @@ export default function TodoItem({ todo }: IProps) {
           display: 'flex',
           minWidth: '100%',
           justifyContent: 'space-between',
-          py: 1,
-          px: 2,
+          p: 2,
           gap: 2,
         }}
       >
@@ -93,10 +92,9 @@ export default function TodoItem({ todo }: IProps) {
               sx={{
                 cursor: 'pointer',
                 textDecoration: completed ? 'line-through' : 'none',
-                lineHeight: 2,
+                lineHeight: 1,
                 color: completed ? 'secondary.main' : 'inherit',
                 wordBreak: 'break-all',
-                lineHeight: 1,
               }}
             >
               {body}
